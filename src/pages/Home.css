@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+.background{
+    background: linear-gradient(90deg, #941021, #720c19);
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.strike{
+    text-decoration: line-through;
+}
+
+.title{
+    color: white;
+    font-family: Rubik, sans-serif;
+    text-align: center;
+    font-size: 58px
+}
+
+.text{
+    color: white;
+    font-family: Rubik, sans-serif;
+    text-align: center;
+    font-size: 46px
+}
+.subtext{
+    color: white;
+    font-family: Rubik, sans-serif;
+    text-align: center;
+    font-size: 12px
+}
+
+
+.lightText{
+    color: white;
+    font-family: Rubik, sans-serif;
+    text-align: center;
+    font-size: 28px
+}
+
+.minute{
+    text-align: center;
+    font-size: 169px;
+    color: white;
+    font-family: Rubik, sans-serif;
+}
+
+
+.button-34 {
+  background: #171738;
+  border-radius: 999px;
+  box-shadow: #dcfff1 0 5px 10px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Rubik, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.button-34:hover{
+    transition: transform ease-in-out 0.2s;
+    transform: scale(1.04);
+}
+
+
+
+.locationButton{
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    display: flex;
+}
+
+
+
+
+@media screen and (max-width: 375px) {
+    .title {
+        font-size: 42px;
+    }
+    .text {
+        font-size: 28px;
+    }
+    .lightText {
+        font-size: 20px;
+    }
+    .minute {
+        font-size: 120px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .title {
+        font-size: 48px;
+    }
+    .text {
+        font-size: 32px;
+    }
+    .lightText {
+        font-size: 22px;
+    }
+    .minute {
+        font-size: 140px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .title {
+        font-size: 50px;
+    }
+    .text {
+        font-size: 34px;
+    }
+    .lightText {
+        font-size: 24px;
+    }
+    .minute {
+        font-size: 150px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 20px;
+    }
+    .text {
+        font-size: 38px;
+    }
+    .lightText {
+        font-size: 26px;
+    }
+    .minute {
+        font-size: 160px;
+    }
+}
