@@ -36,7 +36,7 @@ export default function Home() {
 
   function getPosition(position) {
     const coords = position.coords;
-    if (coords.accuracy >= 1000) {
+    if (coords.accuracy <= 1000) {
       setLocation(coords);
 
 
