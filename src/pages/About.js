@@ -8,7 +8,7 @@ export default function About() {
   return (
     <div className="background">
       <NavBar />
-      <div className="title">About</div>
+      <div className="abouttitle">About</div>
       <div className="gridcontainer">
         <div className="grid">
           <div className="profile">
