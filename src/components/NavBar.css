@@ -40,4 +40,14 @@
     word-break: break-word;
     border: 0;
   }
-  
+
+
+  @media (max-width: 900px) {
+    .navbar {
+      justify-content: center;
+    }
+    .link {
+      font-size: 25px;
+      padding: 10px 10px;
+    }
+  }

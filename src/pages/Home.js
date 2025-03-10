@@ -5,41 +5,74 @@ import { NavBar } from "../components/NavBar.tsx";
 export default function Home() {
   const [location, setLocation] = useState(null);
   const [deerPark, setDeerPark] = useState(false);
-  let waitTime = 3;
-  
+  const [waitTime, setWaitTime] = useState(null);
+  const [projectError, setProjectError] = useState(null);
 
 
-  function checkStorage() {
-    navigator.geolocation.getCurrentPosition(getPosition, (err) =>
-      console.error("Geolocation error:", err)
-    );
+  function getLocation() {
+    navigator.geolocation.getCurrentPosition(getPosition, handleError);
   }
+
+
+  function handleError(err) {
+    console.error("Geolocation error:", err);
+    setProjectError("There was an issue getting your location. Please refresh and try again.");
+  }
+
+
   function getPosition(position) {
     const coords = position.coords;
-    if (coords.accuracy <= 100) {
-      sessionStorage.setItem("location", JSON.stringify(coords));
+    if (coords.accuracy >= 1000) {
       setLocation(coords);
-      setDeerPark(checkLocation(coords.latitude, coords.longitude));
+
+
+      getWaitTime(coords.latitude, coords.longitude)
+        .then((waitTime) => {
+          const isAtDeerPark = checkLocation(waitTime); 
+          setDeerPark(isAtDeerPark);
+
+          if (isAtDeerPark) {
+            console.log("You are at DeerPark, wait time is:", waitTime);
+            setWaitTime(waitTime);
+          } else {
+            console.log("You are not at DeerPark");
+            document.getElementById("title").style.textDecoration = "line-through";
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting wait time:", error);
+          setProjectError("Error: Failed to fetch wait time.");
+        });
     } else {
-      console.log("Error getting your location");
+      setProjectError("Error: Your location accuracy is too low.");
+      console.log(`Error getting your location, accuracy was too low: ${coords.accuracy}`);
     }
   }
 
-  function checkLocation(lat, long) {
-    if (39.6828 < lat && lat < 39.6836 && -75.7561 < long && long < -75.7557) {
-      return true
-    } else {
-      document.getElementById("title")?.classList.add("strike");
-      return true
+
+  const getWaitTime = async (lat, lon) => {
+    try {
+      const response = await fetch(
+        `https://waittime-api.onrender.com/calculate-wait-time?lat=${lat}&lon=${lon}`
+      );
+      const data = await response.json();
+      return data.wait_time; 
+    } catch (error) {
+      console.error("Error fetching wait time:", error);
+      throw error; 
     }
-  }
+  };
+
+  function checkLocation(waitTime) {
   
+    return waitTime !== 101010;
+  }
 
   return (
     <div className="background">
       <NavBar />
       <div id="title" className="title">
-        Current wait time is
+        {projectError ? projectError : "Current wait time is"}
       </div>
       {location ? (
         deerPark ? (
@@ -69,7 +102,7 @@ export default function Home() {
             You need to share your location to find your wait time.
           </div>
           <div className="locationButton">
-            <button className="button-34" onClick={checkStorage}>
+            <button className="button-34" onClick={getLocation}>
               Share Location
             </button>
           </div>
