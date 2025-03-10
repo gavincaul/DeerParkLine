@@ -16,8 +16,22 @@ export default function Home() {
 
   function handleError(err) {
     console.error("Geolocation error:", err);
-    setProjectError("There was an issue getting your location. Please refresh and try again.");
+    switch (err.code) {
+      case err.PERMISSION_DENIED:
+        setProjectError("Permission denied. Please enable location access.");
+        break;
+      case err.POSITION_UNAVAILABLE:
+        setProjectError("Location information is unavailable.");
+        break;
+      case err.TIMEOUT:
+        setProjectError("The request to get your location timed out.");
+        break;
+      default:
+        setProjectError("An unknown error occurred while retrieving location.");
+        break;
+    }
   }
+  
 
 
   function getPosition(position) {
@@ -44,7 +58,7 @@ export default function Home() {
           setProjectError("Error: Failed to fetch wait time.");
         });
     } else {
-      setProjectError("Error: Your location accuracy is too low.");
+      setProjectError(`Error: Your location accuracy is too low.::Accuracy ${coords.accuracy}`);
       console.log(`Error getting your location, accuracy was too low: ${coords.accuracy}`);
     }
   }
