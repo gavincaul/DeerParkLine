@@ -42,6 +42,14 @@ export default function Home() {
       getWaitTime(coords.latitude, coords.longitude)
         .then((waitTime) => {
           const isAtDeerPark = checkLocation(waitTime);
+          if (isAtDeerPark) {
+            return (
+              <div>
+                <div className="text">DeerPark is Closed</div>
+                <div className="lightText">Go home.</div>
+              </div>
+            )
+          }
           setDeerPark(isAtDeerPark);
 
           if (isAtDeerPark) {
