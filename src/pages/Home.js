@@ -42,7 +42,7 @@ export default function Home() {
       getWaitTime(coords.latitude, coords.longitude)
         .then((waitTime) => {
           const isAtDeerPark = checkLocation(waitTime);
-          if (isAtDeerPark) {
+          if (isAtDeerPark === 111000) {
             return (
               <div>
                 <div className="text">DeerPark is Closed</div>
@@ -112,6 +112,9 @@ export default function Home() {
   };
 
   function checkLocation(waitTime) {
+    if (waitTime === 111000) {
+      return 111000;
+    }
     return waitTime !== 101010;
   }
   return (
